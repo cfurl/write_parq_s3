@@ -6,10 +6,11 @@ RUN mkdir -p /data
 WORKDIR /code
 
 COPY .Renviron .
-COPY /code/s3_parq_write.R .
+COPY /code/s3_parq_write_compose.R .
 COPY /code/install_packages.R .
-COPY /data/st4_1hr_2023070101_2024010100_eaa.txt /code/st4_1hr_2023070101_2024010100_eaa.txt
+COPY /data/st4_conus.2025011613.01h.txt /code/st4_conus.2025011613.01h.txt
+COPY /data/texas_buffer_spatial_join.csv /code/texas_buffer_spatial_join.csv
 
 RUN Rscript install_packages.R
 
-CMD Rscript s3_parq_write.R
+CMD Rscript s3_parq_write_compose.R
