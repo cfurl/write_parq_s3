@@ -30,7 +30,8 @@ bucket$ls(recursive = TRUE)
 s3_path <- bucket$path("")
 
 # read .csv pivot long
-i = "C:\\Users\\cfurl\\OneDrive - Edwards Aquifer Authority\\r\\stg4_s3_parq\\write_parq_s3\\data\\st4_1hr_2023070101_2024010100_eaa.txt"
+# change code back to data
+i = "st4_1hr_2023070101_2024010100_eaa.txt"
 ddd <- read_csv(i) %>%
   pivot_longer(!1:5, names_to = "time", values_to = "rain_mm") %>%
   mutate(time = ymd_h(str_sub(time,2,11))) %>%
@@ -44,43 +45,5 @@ ddd |>
                 format = "parquet")
 
 # check and see what is there
-bucket$ls("year=2023",recursive = FALSE)
-
-# Now let's read something from the .parq setup and make a query
-# establish your connection to the root folder of your parquet files, this is the time to see your file system schema and make any adjustments
-eaa_stg4_parq <- open_dataset(s3_path)
-nrow(eaa_stg4_parq)
-
-# have a query space and don't collect yet
-sum_rain_query <- eaa_stg4_parq %>%
-  filter(year==2023) %>%
-  group_by (grib_id) %>%
-  summarize(
-    sum_rain = sum(rain_mm, na.rm=TRUE)
-  ) %>%
-  arrange(desc(sum_rain))
-
-# collect the query when you are ready (grouped and summed over 120 million rows in under three minutes)
-tic()
-sum_rain_collect <- collect(sum_rain_query)
-toc()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#bucket$ls("year=2023",recursive = FALSE)
 

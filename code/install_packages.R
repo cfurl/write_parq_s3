@@ -1,0 +1,8 @@
+install.packages("aws.s3", dependencies=TRUE)
+install.packages("arrow", dependencies=TRUE)
+install.packages("dplyr", dependencies=TRUE)
+install.packages("lubridate", dependencies=TRUE)
+install.packages("tidyr", dependencies=TRUE)
+install.packages("readr", dependencies=TRUE)
+install.packages("stringr", dependencies=TRUE)
+install.packages("tictoc", dependencies=TRUE)

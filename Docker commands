@@ -1,0 +1,8 @@
+simple build and run
+
+ docker image build --tag chuckie-please .  (note the dot indicates to build Dockerfile in current folder)
+ 
+ docker container run chuckie-please
+ 
+to solve my AWS permissions issues I just copied the .Renviron file to the container home folder.  Just like I would in a non-docker env... 
+I have the .Renviron on the gitignore
